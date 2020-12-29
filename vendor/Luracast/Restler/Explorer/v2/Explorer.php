@@ -193,7 +193,7 @@ class Explorer implements iProvideMultiVersionApi
         if (isset($info['port'])) {
             $r->host .= ':' . $info['port'];
         }
-        $r->basePath = isset($info['path']) ? $info['path'] : '';
+        $r->basePath = isset($info['path']) ? $info['path'] : '/';
         if (!empty(static::$schemes)) {
             $r->schemes = static::$schemes;
         }
@@ -258,7 +258,7 @@ class Explorer implements iProvideMultiVersionApi
         $r->responses = $this->responses($route);
         //TODO: avoid hard coding. Properly detect security
         if ($route['accessLevel']) {
-            $r->security = array(array('api_key' => array()));
+            $r->security = array(array('apiKey' => array()));
         }
         /*
         $this->setType(
@@ -359,7 +359,7 @@ class Explorer implements iProvideMultiVersionApi
         if (empty($info->children) || $info->type != 'array') {
             //primitives
             if ($info->default) {
-                $p->defaultValue = $info->default;
+                $p->default = $info->default;
             }
             if ($info->choice) {
                 $p->enum = $info->choice;
@@ -423,7 +423,7 @@ class Explorer implements iProvideMultiVersionApi
             $this->setType($p, $info);
             $p->description = isset($child['description']) ? $child['description'] : '';
             if ($info->default) {
-                $p->defaultValue = $info->default;
+                $p->default = $info->default;
             }
             if ($info->choice) {
                 $p->enum = $info->choice;

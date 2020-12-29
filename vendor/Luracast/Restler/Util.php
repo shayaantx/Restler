@@ -242,6 +242,10 @@ class Util
 
     public static function getShortName($className)
     {
+        if (is_array($className)) {
+            // if class name is an array, return null (since mixed types don't seem to be supported)
+            return null;
+        }
         $className = explode('\\', $className);
         return end($className);
     }
