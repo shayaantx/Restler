@@ -59,6 +59,7 @@ class CommentParser
         'choice'     => true,
         'select'     => true,
         'properties' => true,
+        'requires'   => true,
     );
 
     /**

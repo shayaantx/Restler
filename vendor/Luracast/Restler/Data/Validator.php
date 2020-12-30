@@ -424,6 +424,7 @@ class Validator implements iValidate
             $input = $func($input);
         }
         if (
+            !is_array($info->type) &&
             isset(static::$preFilters[$info->type]) &&
             (is_scalar($input) || !empty($info->children)) &&
             is_callable($func = static::$preFilters[$info->type])
@@ -480,7 +481,7 @@ class Validator implements iValidate
             }
 
             if (isset ($info->choice)) {
-                if (!$info->required && empty($input)) {
+                if (!$info->required && !is_numeric($input) && empty($input)) {
                     //since its optional, and empty let it pass.
                     $input = null;
                 } elseif (is_array($input)) {
